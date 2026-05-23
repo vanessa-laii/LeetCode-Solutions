@@ -16,6 +16,5 @@ class Solution:
             return dp[index]
         
         return min(recur(0), recur(1))
-            
 
         
