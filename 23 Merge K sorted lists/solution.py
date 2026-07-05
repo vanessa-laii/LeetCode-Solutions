@@ -3,36 +3,34 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-import heapq
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        # push into a min heap to sort the nodes
-        # rebuild heap into a LL
+        # can the result be a new list
+        # does the sorting need to be stable?
+        # whats the maximum lengths of the lists
+        # ascending order
+
+        # min heap
+        # put the head of every list in the heap, as you tae=ke, push next element into heap
+        # we need a tie breaker so take l
         heap = []
         for l in range(len(lists)):
             head = lists[l]
             if head:
-                # the index l acts as a tie breaker for the heap
                 heapq.heappush(heap, (head.val, l, head))
         
+        # now keep poping from the heap and into the res LL
         dummy = ListNode(0)
-        curr = dummy 
-
+        curr = dummy
         while heap:
-            val, index, node = heapq.heappop(heap)
+            val, l, node = heapq.heappop(heap)
             curr.next = node
             curr = curr.next
 
-            # push in the next node in the list 
             if node.next:
                 node = node.next
-                heapq.heappush(heap, (node.val, index, node))
+                heapq.heappush(heap, (node.val, l, node))
         
         return dummy.next
 
-
-
-
-
-        
         
